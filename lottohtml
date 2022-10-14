@@ -1,0 +1,71 @@
+<!--자바스크립트를 사용하여 로또번호 생성-->
+<!--버튼을 누르면 1부터 45까지 숫자 중 6개를 무작위로 출력-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>자바스크립트 로또번호 생성</title>
+    <style>
+        /*CSS : 로또번호를 꾸미는 부분*/
+        .Lotto {
+            width: 600px;
+            height: 200px;
+            text-align: center;
+            color: #f4f4f4;
+            background-color: black;
+            padding-top: 32px;
+        }
+        #Lotto {
+            color: #F0C420;
+            font-size: 64px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Lotto">
+        <b>==추천 로또 번호==</b><br>
+        <div id="Lotto">00 00 00 00 00 00</div>
+    </div>
+
+    <script>
+        function Lotto() {
+            var Lotto = new Array();
+            for (var i = 0; i < 6; i++) {
+                LottoNum = Math.floor(Math.random() * 45) + 1;
+                Lotto[i] = LottoNum;
+                for (var j = 0; j < i; j++) {
+                    if (Lotto[i] == Lotto[j]) {
+                        i--;
+                        break;
+                    }
+                }
+            }
+
+            Lotto.sort(function (a, b) {
+                return a - b;
+            });
+
+            Write(Lotto);
+            //로또번호를 써주는 함수
+
+            function Write(Lotto) {
+                document.getElementById("Lotto").innerHTML = Lotto;
+            }
+        }
+    </script>
+
+<!--5초마다 번호를 새로고침함-->
+    <script>
+        setInterval(Lotto, 3000);
+    </script>
+
+    <button onclick="Lotto()">로또번호 생성</button>
+
+
+
+
+</body>
+
+
+</html>
